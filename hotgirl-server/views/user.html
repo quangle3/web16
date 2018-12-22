@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <h1 id="name"></h1>
+    <button type="button">LOGOUT</button>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        const id = window.location.href.split("/")[3];
+        $.ajax({
+            type: "get",
+            url: "/userInfo/"+id,
+            success: function(data) {
+                console.log(data);
+                $(`#name`).text("Welcome "+data.username);
+                if (!data) {
+                    window.location.href = "/login";
+                }
+            }, error: function(err) {
+                console.log(err);
+            }
+        });
+        $("button").on('click', function() {
+            $.ajax({
+                url: "/logout",
+                type: "delete",
+                success: function(data) {
+                    console.log(data);
+                    window.location.href = "/login"
+                }
+            })
+            
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse" style="border-radius: 0px !important">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Quyet de</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/ask">Hoi nhanh</a></li>
+                    <li><a href="#">Dap gon</a></li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+        <h1 id="question" class="text-center" style="margin-top: 60px">Question</h1>
+        <form action="">
+            <div class="row text-center" style="margin-top: 60px">
+                <div class="col-md-6">
+                    <button class="btn btn-danger btn-lg glyphicon glyphicon-thumbs-down" id="no">Sai/Khong/Trai</button>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-primary btn-lg glyphicon glyphicon-thumbs-up" id="yes">Dung/Co/Phai</button>
+                </div>
+                    
+            </div>
+            <div class="row text-center" style="margin-top: 60px">
+                <button type="button" class="btn btn-default" id="questionResult">Xem ket qua vote</button>
+                <button class="btn btn-default" id="questionOther">Xem cau khac</button>
+            </div>
+        </form>
+        
+    </div>
+    
+    
+    <!-- <script>
+        function reqListener () {
+            console.log(this.responseText);
+            let question = JSON.parse(this.responseText);
+            console.log(question, question.content);
+            document.getElementById("question").innerText = question.content;
+        }
+
+        var oReq = new XMLHttpRequest();
+        oReq.addEventListener("load", reqListener);
+        oReq.open("GET", "http://localhost:3000/randomquestion");
+        oReq.send();
+    </script> -->
+    
+     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+         $.ajax({
+            url: "http://localhost:3000/randomquestion",
+            type: "GET",
+            success: function(data) {
+                $("#question").text(data.content);
+                $("#question").attr("data-question", data._id);
+            }, error: function(err) {
+                console.log(err);
+            }
+        });
+
+        $("#no, #yes").on("click", function() {
+            $.ajax({
+                url: "http://localhost:3000/answer",
+                type: "POST",
+                data: {
+                    questionId: $("#question").attr("data-question"),
+                    vote: $(this).attr("id")
+                },
+                success: function(data) {
+                    console.log(data);
+                    window.location.href = "/questiondetail/"+data._id;
+                }, error: function(err) {
+                    console.log(err);
+                }
+            })
+        });
+
+        $("#questionResult").on("click", function() {
+            window.location.href = "/questiondetail/"+$("#question").attr("data-question");
+            console.log($("#question").attr("data-question"));
+            
+        });
+
+        $("#questionOther").on("click", function() {
+            window.location.href = "/";
+        });
+    </script>
+</body>
+</html>

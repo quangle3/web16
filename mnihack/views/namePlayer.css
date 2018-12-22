@@ -1,0 +1,21 @@
+div {
+    width: 70% !important;
+}
+
+button {
+    margin: 0 auto !important;
+    display: block !important;
+    background-color: #BF1363 !important;
+    color: white !important;
+    line-height: 25px !important;
+    border-radius: 8px !important;
+}
+
+input {
+    border-color: #BF1363 !important;
+}
+
+h1 {
+    border-bottom: 1.5px solid #bcb8ba;
+    font-weight: bold !important;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-inverse" style="border-radius: 0px !important">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Quyet de</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>                        
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/ask">Hoi nhanh</a></li>
+                    <li><a href="#">Dap gon</a></li>
+                </ul>
+            </div>
+            
+        </div>
+    </nav>
+    <div class="container">
+        <h1 id="question" class="row text-center" style="margin-top: 60px">Question</h1>
+        <h3 id="vote" class="row text-center" style="margin-top: 60px">? vote</h3>
+        <div style="display: flex">
+            <div id="no" style="background-color: #d9534f; height: 34px; display: inline-block; width: 50%;"></div>
+            <div id="yes" style="background-color: #337ab7; height: 34px; display: inline-block; width: 50%;"></div>
+        </div>
+        <div class="row text-center">
+            <button id="questionOther" class="btn btn-success btn-lg btn_xemcauhoikhac" style="margin-top: 60px">Xem cau hoi khac</button>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script>
+        const questionId = location.href.split("/")[4];
+        console.log(questionId);
+        
+        $.ajax({
+            url: "/question/"+questionId,
+            type: "get",
+            success: function(data) {
+                $("#question").text(data.content);
+                $("#vote").text(data.yes+data.no+" vote");
+                $("#no").text((data.no/(data.no+data.yes))*100+"%");
+                $("#yes").text((data.yes/(data.no+data.yes))*100+"%");
+                $("#no").width((data.no/(data.no+data.yes))*100 + "%")
+                $("#yes").width((data.yes/(data.no+data.yes))*100 + "%")
+            }, error: function(err) {
+                console.log(err);
+            }
+        });
+
+        $("#questionOther").on("click", function() {
+            window.location.href = "/";
+        });
+
+        
+
+
+    </script>
+</body>
+</html>

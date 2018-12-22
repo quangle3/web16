@@ -1,0 +1,32 @@
+div {
+    width: 70% !important;
+}
+
+h1 {
+    border-bottom: 1.5px solid #bcb8ba;
+    font-weight: bold !important;
+}
+
+button {
+    margin: 0 auto !important;
+    display: block !important;
+    background-color: #BF1363 !important;
+    color: white !important;
+    line-height: 25px !important;
+    border-radius: 8px !important;
+    padding-left:  50px !important;
+    padding-right: 50px !important;
+}
+
+#rowSecond {
+    font-weight: bold;
+    background-color: #BF1363; 
+    color: white;
+}
+
+input {
+    width: 50%;
+    border-radius: 5px;
+    border: 1px solid #ced3db;
+}
+

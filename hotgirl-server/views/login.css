@@ -1,0 +1,21 @@
+.form {
+    margin:auto;
+    margin-top:80px;
+    max-width:480px;
+    padding:40px;
+    background:#eee;
+    
+}
+.header {
+    text-align:center;
+    margin-bottom:20px;
+}
+.lock{
+    font-size:100px;
+}
+
+p {
+    font-weight: bold;
+}
+  
+  
